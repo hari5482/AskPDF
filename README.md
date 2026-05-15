@@ -11,7 +11,7 @@ Built using:
 - HuggingFace Embeddings
 - Groq LLM APIs
 
-The application uses Retrieval-Augmented Generation (RAG) to provide accurate responses strictly based on the uploaded documents.
+The application uses Retrieval-Augmented Generation (RAG) to generate responses grounded strictly in the uploaded documents.
 
 ---
 
@@ -19,7 +19,7 @@ The application uses Retrieval-Augmented Generation (RAG) to provide accurate re
 
 - Persistent Chat UI with session-based conversation history
 - Fast semantic search using HuggingFace embeddings + FAISS
-- Blazing-fast inference using Groq Cloud (Llama-3 / Mixtral)
+- Blazing-fast inference using Groq Cloud (Llama 3, Llama 4, GPT-OSS)
 - Fully Dockerized deployment for portability
 - Lightweight and optimized Docker image
 - Security-focused setup with `.env`, `.gitignore`, and `.dockerignore`
@@ -67,14 +67,17 @@ Streamlit Chat Interface
 
 ```text
 .
-├── main.py              # Streamlit application logic & RAG pipeline
-├── Dockerfile           # Docker build instructions
-├── requirements.txt     # Python dependencies
-├── README.md            # Project documentation
-├── .dockerignore        # Docker build optimization
-├── .gitignore           # Git security filters
-├── .env                 # Environment variables (local only)
-└── Docs/                # Local PDF storage
+
+├── main.py                  # Streamlit application logic & RAG pipeline
+├── Dockerfile               # Docker build instructions
+├── requirements.txt         # Python dependencies
+├── README.md                # Project documentation
+├── .dockerignore            # Docker build optimization
+├── .gitignore               # Git security filters
+├── .env                     # Environment variables (local only)
+├── Docs/                    # PDF document storage
+├── faiss_index/             # Persistent FAISS vector database
+└── assets/                  # Images/screenshots
 ```
 
 ---
@@ -151,6 +154,7 @@ The Docker container:
 - Copies application source code
 - Exposes Streamlit port
 - Runs the Streamlit application automatically
+- Uses CPU-only PyTorch to avoid unnecessary CUDA/GPU dependencies
 
 ---
 
@@ -169,9 +173,9 @@ The following are excluded using `.dockerignore`:
 
 - `.env`
 - `.venv`
-- local PDFs
-- FAISS indexes
-- IDE files
+- Git metadata
+- Python cache files
+- IDE/editor configuration files
 
 This keeps the image:
 - lightweight
@@ -182,11 +186,24 @@ This keeps the image:
 
 # ⚡ Performance Optimizations
 
-- FAISS enables ultra-fast semantic retrieval
-- HuggingFace embeddings run locally
-- Groq provides extremely low latency inference
-- Docker image optimized using slim Python base image
-- Dependency layers cached for faster rebuilds
+- Docker image optimized using `python:3.11-slim`
+- CPU-only PyTorch installation reduces image size significantly
+- `.dockerignore` prevents unnecessary local files from entering the container
+- FAISS vector database persists locally for faster startup
+
+---
+
+# 💾 Persistent Vector Database
+
+The application stores FAISS vector indexes locally inside the `faiss_index/` directory.
+
+On application startup:
+
+- Existing embeddings are automatically loaded
+- Re-embedding is avoided
+- Startup becomes significantly faster
+
+This improves performance and reduces repeated embedding computation.
 
 ---
 

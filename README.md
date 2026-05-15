@@ -2,6 +2,8 @@
 
 AskPDF is a containerized, full-stack AI application that allows users to upload multiple PDF documents and engage in a real-time conversational Q&A experience.
 
+![AskPDF Interface Preview](assets/screenshot.jpeg)
+
 Built using:
 - Streamlit
 - LangChain

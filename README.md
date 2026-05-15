@@ -127,7 +127,7 @@ docker build -t askpdf-app .
 ## Step 2: Run Docker Container
 
 ```bash
-docker run -d \ --name askpdf-container \ -p 8501:8501 \ --env-file .env \ askpdf-app
+docker run -d --name askpdf-container -p 8501:8501 --env-file .env askpdf-app
 ```
 
 ---

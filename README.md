@@ -37,3 +37,23 @@ Create a `.env` file in the root directory and add your API credentials (this fi
 GROQ_API_KEY=your_api_key_here
 HF_TOKEN=your_huggingface_token_here
 
+---
+
+## 📂 Project Structure
+
+```text
+.
+├── main.py              # Streamlit application logic & RAG pipeline
+├── Dockerfile           # Optimized Docker build instructions
+├── requirements.txt     # Python dependencies
+├── .dockerignore        # Build context optimization (excludes data/secrets)
+├── .gitignore           # Git security and privacy filters
+└── Docs/                # (Local only) Directory for PDF storage
+
+---
+
+## 🔒 Security & Privacy
+
+* **API Security:** The `.env` file is strictly ignored by Git (via `.gitignore`) to prevent accidental exposure of sensitive API keys.
+* **Data Privacy:** Uploaded documents (`Docs/`) and generated vector indices (`faiss_index/`) are excluded from the Docker image build via `.dockerignore` to keep the image lightweight and private.
+* **Layer Optimization:** The `Dockerfile` includes specific updates for `pip` and `wheel` to mitigate common container vulnerabilities detected during security audits.

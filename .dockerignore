@@ -1,17 +1,8 @@
-# Virtual environment
 .venv/
-
-# Environment variables (security best practice: don't bake secrets into the image)
 .env
-
-# IDE files
 .idea/
 .vscode/
-
-# Git
 .git/
 .gitignore
-
-# Python cache
 __pycache__/
 *.pyc

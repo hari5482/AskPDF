@@ -9,7 +9,7 @@ Built using:
 - HuggingFace Embeddings
 - Groq LLM APIs
 
-the application uses Retrieval-Augmented Generation (RAG) to provide accurate responses strictly based on the uploaded documents.
+The application uses Retrieval-Augmented Generation (RAG) to provide accurate responses strictly based on the uploaded documents.
 
 ---
 
@@ -125,11 +125,7 @@ docker build -t askpdf-app .
 ## Step 2: Run Docker Container
 
 ```bash
-docker run -d \
-  --name askpdf-container \
-  -p 8501:8501 \
-  --env-file .env \
-  askpdf-app
+docker run -d \ --name askpdf-container \ -p 8501:8501 \ --env-file .env \ askpdf-app
 ```
 
 ---

@@ -6,3 +6,5 @@
 .gitignore
 __pycache__/
 *.pyc
+Docs/
+faiss_index/
